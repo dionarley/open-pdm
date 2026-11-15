@@ -132,6 +132,19 @@ impl HandlerRegistry {
         Self::with_converters(Arc::new(ConverterRegistry::load(&crate::app::dir())))
     }
 
+    /// Like [`Self::builtin`], but with `handler` tried before every built-in
+    /// handler that claims the same extension.
+    ///
+    /// Used by applications that bring their own implementation of a format —
+    /// for example a STEP handler backed by a geometry kernel instead of the
+    /// metadata-only built-in. `handler` must not be the fallback (empty
+    /// extension list) unless it is meant to replace the generic handler.
+    pub fn with_first(handler: Box<dyn CadHandler>) -> Self {
+        let mut registry = Self::builtin();
+        registry.handlers.insert(0, handler);
+        registry
+    }
+
     /// Find the handler for `path`, falling back to the generic handler.
     pub fn resolve(&self, path: &str) -> &dyn CadHandler {
         let ext = extension_of(path);
