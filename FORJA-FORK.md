@@ -10,6 +10,12 @@ dependência (path dependency); mudanças entram aqui, sem abrir PR na origem.
   registra um handler antes dos embutidos, para o serviço substituir o handler
   de STEP (somente metadados) por um que tessela com o `solidcore`.
 
+## Licença
+
+O manifesto declara `MIT OR Apache-2.0`, mas o upstream não traz os arquivos de
+licença. Este fork adiciona `LICENSE-MIT` e `LICENSE-APACHE` (texto canônico,
+sem alteração) para o pacote poder ser distribuído.
+
 ## Atualizar a partir da origem
 
 ```sh
